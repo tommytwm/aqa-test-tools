@@ -20,6 +20,7 @@ export default class ReleaseSummary extends Component {
         const originUrl = window.location.origin;
 
         const build = await fetchData(`/api/getParents?id=${parentId}`);
+        const upload = await fetchData(`/api/postGithub`);
         let report = "";
         if (build && build[0]) {
             const { buildName, buildUrl, timestamp, startBy } = build[0];

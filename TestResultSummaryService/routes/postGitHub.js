@@ -4,19 +4,11 @@ const FormData = require('form-data');
 
 
 module.exports = async (req, res) => {
-    // TODO: None of the console logs seem to appear at route /postGitHub
-
-    console.log("HELLO");
-
     const doFetch = async (...args) => {
-        console.log("--------------------------------------------");
-        console.log("HELLO");
-        console.log("--------------------------------------------");
-
         return (await fetch(...args)).json();
     };
 
-    const file = fs.readFileSync("../../README.md");
+    const file = fs.readFileSync("./README.md");
     const form1 = new FormData();
     form1.append("content_type", "image/jpeg");
     form1.append("authenticity_token", "__");
@@ -34,7 +26,7 @@ module.exports = async (req, res) => {
             method: "POST",
         }
     );
-    console.log(asset, form);
+    console.log(upload_url, asset, form);
 
     res.send( asset, form );
 };
