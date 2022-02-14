@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     const file = fs.readFileSync("../../README.md");
     const form1 = new FormData();
     form1.append("content_type", "image/jpeg");
-    form1.append("authenticity_token", "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");
+    form1.append("authenticity_token", "__");
     form1.append("size", file.length);
     form1.append("name", "README.md");
 
