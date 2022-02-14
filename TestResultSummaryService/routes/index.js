@@ -41,6 +41,8 @@ app.get( '/parseJenkinsUrl', wrap( require( "./parseJenkinsUrl" ) ) );
 app.get( '/populateDB', wrap( require( "./populateDB" ) ) );
 app.get( '/getFeedbackUrl', wrap( require( "./getFeedbackUrl" ) ) );
 
+app.get( '/postGitHub', wrap( require( "./postGitHub" ) ) );
+
 app.get( '/updateComments', wrap( require( "./updateComments" ) ) );
 app.get( '/updateKeepForever', wrap( require( "./updateKeepForever" ) ) );
 
