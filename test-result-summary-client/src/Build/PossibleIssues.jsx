@@ -126,6 +126,9 @@ export default class PossibleIssues extends Component {
                 const issueState = relatedIssues.items[index].state;
                 const issueFullName = relatedIssues.items[index].title;
                 const creatorName = relatedIssues.items[index].user.login;
+
+                // TODO: Check if we are able to get user feedback and send user feedback
+
                 const userFeedback = (
                     <>
                         <Button
