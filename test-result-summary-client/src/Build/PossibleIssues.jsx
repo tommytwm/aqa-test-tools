@@ -137,9 +137,7 @@ export default class PossibleIssues extends Component {
                                 true
                             )}
                         >
-                            <SmileOutlined
-                                style={{ fontSize: '25px', color: 'green' }}
-                            />
+                            <SmileOutlined />
                         </Button>
                         &nbsp;
                         <Button
@@ -151,9 +149,7 @@ export default class PossibleIssues extends Component {
                                 false
                             )}
                         >
-                            <FrownOutlined
-                                style={{ fontSize: '25px', color: 'red' }}
-                            />
+                            <FrownOutlined />
                         </Button>
                     </>
                 );

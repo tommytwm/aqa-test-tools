@@ -9,3 +9,21 @@
     word-break: break-all;
     white-space: pre-wrap;
 }
+
+.anticon-smile {
+    font-size: 25px;
+    color: grey;
+}
+
+.anticon-smile:hover {
+    color: green;
+}
+
+.anticon-frown {
+    font-size: 25px;
+    color: grey;
+}
+
+.anticon-frown:hover {
+    color: red;
+}
