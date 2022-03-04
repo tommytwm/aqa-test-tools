@@ -25,6 +25,11 @@ export default class PossibleIssues extends Component {
         issueCreator,
         accuracy
     ) => {
+        // TODO: Right now when users click on the faces, they call to fetch data
+        //  instead of POST-ing data. We need to make a postUserFeedback to send data.
+        // TODO: We also need to getUserFeedback to get data on which feedback has
+        //  been selected for the issue.
+
         const feedback = await fetchData(
             `/api/getFeedbackUrl?repoName=${repoName}&buildName=${buildName}&issueName=${issueName}&issueCreator=${issueCreator}&accuracy=${accuracy}`
         );
