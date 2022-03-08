@@ -40,20 +40,18 @@ export default class PossibleIssues extends Component {
     };
 
     updateUserFeedback = async (
-        issueNumber,
-        issueName,
+        id,
         feedback
     ) => {
         //TODO: how should we store the author?
-        const feedback = await fetchData(
-            `/api/updateUserFeedback?issueNumber=${issueNumber}&issueName=${issueName}&feedback=${feedback}`
+        console.log("update");
+        const update = await fetchData(
+            `/api/updateUserFeedback?id=${id}&feedback=${feedback}`
         );
 
         // TODO: decide on appropriate error handling
-        if (feedback.error) {
-            console.log(feedback.error);
-        } else {
-            console.log(feedback.output.result);
+        if (update.error) {
+            console.log(update.error);
         }
     };
 
@@ -149,14 +147,12 @@ export default class PossibleIssues extends Component {
                 const issueFullName = relatedIssues.items[index].title;
                 const creatorName = relatedIssues.items[index].user.login;
 
-                // TODO: Check if we are able to get user feedback and send user feedback
-
+                // TODO: update upsert not working
                 const userFeedback = (
                     <>
                         <Button
-                            onClick={this.updateUserFeedback(
-                                issueNumber,
-                                issueFullName,
+                            onClick={() => this.updateUserFeedback(
+                                123,
                                 1                            
                             )}
                         >
@@ -164,10 +160,9 @@ export default class PossibleIssues extends Component {
                         </Button>
                         &nbsp;
                         <Button
-                            onClick={this.updateUserFeedback(
-                                issueNumber,
-                                creatorName,
-                                -1
+                            onClick={() => this.updateUserFeedback(
+                                123,
+                                -1                            
                             )}
                         >
                             <FrownOutlined />

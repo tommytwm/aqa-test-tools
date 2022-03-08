@@ -4,13 +4,13 @@ const { UserFeedbackDB } = require('../Database');
 *   updateUserFeedback API updates feedback based on user and issueNumber
 */
 module.exports = async (req, res) => {
-    const { issueNumber, issueCreator, feedback } = req.query;
-    if ( issueNumber && issueCreator && feedback ) {
+    const { _id, feedback } = req.query;
+    if ( _id && feedback ) {
         const db = new UserFeedbackDB();
         await db.update(
-            { issueNumber: issueNumber },
+            { _id: new OBjectID(_id) },
             { $set: { feedback: feedback }},
-            { upset: true }
+            { upsert: true }
         );
         res.send({ error: false });
     }
