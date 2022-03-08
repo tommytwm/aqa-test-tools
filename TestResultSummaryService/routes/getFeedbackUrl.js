@@ -8,7 +8,8 @@ module.exports = async (req, res) => {
         res.send({ error: 'Input parameters are missing' });
     } else {
         const db = new UserFeedbackDB();
-        const result = await db.getData(issueNumber, issueName).toArray();
+        // TODO: Need to decide if the feedback should be tied to issueCreator or current user
+        const result = await db.getData(issueNumber, issueCreator).toArray();
         if (!result || result.length === 0 ) {
             res.send({ output: null }); 
         }
