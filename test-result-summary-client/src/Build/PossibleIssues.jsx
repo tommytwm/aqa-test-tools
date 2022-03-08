@@ -129,6 +129,7 @@ export default class PossibleIssues extends Component {
                     </a>
                 );
                 const issueState = relatedIssues.items[index].state;
+                const issueId = relatedIssues.items[index].id;
                 const issueFullName = relatedIssues.items[index].title;
                 const creatorName = relatedIssues.items[index].user.login;
 
