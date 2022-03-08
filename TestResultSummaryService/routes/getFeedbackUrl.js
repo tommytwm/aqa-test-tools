@@ -1,4 +1,4 @@
-const { TestResultsDB, ObjectID } = require('../Database');
+const { UserFeedbackDB } = require('../Database');
 
 module.exports = async (req, res) => {
     const { repoName, buildName, issueNumber, issueName, issueCreator, accuracy } =
@@ -8,8 +8,9 @@ module.exports = async (req, res) => {
         res.send({ error: 'Input parameters are missing' });
     } else {
         // TODO: Get Feedback info from db
-        const db = new TestResultsDB();
-        const result = await db.getData(req.query).toArray();
+        const db = new UserFeedbackDB();
+        const result = await db.getData({issueNumber: "1234", issueCreator: "tommy-test"}).toArray();
+        console.log(result);
         res.send({ output: { result: 'success' } });
     }
 };
