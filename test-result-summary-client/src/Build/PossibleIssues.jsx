@@ -26,15 +26,30 @@ export default class PossibleIssues extends Component {
         issueCreator,
         accuracy
     ) => {
-        // TODO: Right now when users click on the faces, they call to fetch data
-        //  instead of POST-ing data. We need to make a postUserFeedback to send data.
-        // TODO: We also need to getUserFeedback to get data on which feedback has
-        //  been selected for the issue.
+        // TODO: We need to find out what the object should look like in this new collection
 
         const feedback = await fetchData(
             `/api/getFeedbackUrl?repoName=${repoName}&buildName=${buildName}&issueNumber=${issueNumber}&issueName=${issueName}&issueCreator=${issueCreator}&accuracy=${accuracy}`
         );
 
+        if (feedback.error) {
+            console.log(feedback.error);
+        } else {
+            console.log(feedback.output.result);
+        }
+    };
+
+    updateUserFeedback = async (
+        issueNumber,
+        issueName,
+        feedback
+    ) => {
+        //TODO: how should we store the author?
+        const feedback = await fetchData(
+            `/api/updateUserFeedback?issueNumber=${issueNumber}&issueName=${issueName}&feedback=${feedback}`
+        );
+
+        // TODO: decide on appropriate error handling
         if (feedback.error) {
             console.log(feedback.error);
         } else {
@@ -139,26 +154,20 @@ export default class PossibleIssues extends Component {
                 const userFeedback = (
                     <>
                         <Button
-                            onClick={this.getUserFeedback(
-                                repoName,
-                                buildName,
+                            onClick={this.updateUserFeedback(
                                 issueNumber,
                                 issueFullName,
-                                creatorName,
-                                true
+                                1                            
                             )}
                         >
                             <SmileOutlined />
                         </Button>
                         &nbsp;
                         <Button
-                            onClick={this.getUserFeedback(
-                                repoName,
-                                buildName,
+                            onClick={this.updateUserFeedback(
                                 issueNumber,
-                                issueFullName,
                                 creatorName,
-                                false
+                                -1
                             )}
                         >
                             <FrownOutlined />

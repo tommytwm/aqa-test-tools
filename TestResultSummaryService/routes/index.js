@@ -47,6 +47,7 @@ app.get('/getFeedbackUrl', wrap(require('./getFeedbackUrl')));
 
 app.get('/updateComments', wrap(require('./updateComments')));
 app.get('/updateKeepForever', wrap(require('./updateKeepForever')));
+app.get('/updateUserFeedback', wrap(require('./updateUserFeedback')));
 
 // jwt
 app.post('/auth/register', wrap(require('./jwt/register')));
