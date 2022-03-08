@@ -21,6 +21,7 @@ export default class PossibleIssues extends Component {
     getUserFeedback = async (
         repoName,
         buildName,
+        issueNumber,
         issueName,
         issueCreator,
         accuracy
@@ -31,7 +32,7 @@ export default class PossibleIssues extends Component {
         //  been selected for the issue.
 
         const feedback = await fetchData(
-            `/api/getFeedbackUrl?repoName=${repoName}&buildName=${buildName}&issueName=${issueName}&issueCreator=${issueCreator}&accuracy=${accuracy}`
+            `/api/getFeedbackUrl?repoName=${repoName}&buildName=${buildName}&issueNumber=${issueNumber}&issueName=${issueName}&issueCreator=${issueCreator}&accuracy=${accuracy}`
         );
 
         if (feedback.error) {
@@ -141,6 +142,7 @@ export default class PossibleIssues extends Component {
                             onClick={this.getUserFeedback(
                                 repoName,
                                 buildName,
+                                issueNumber,
                                 issueFullName,
                                 creatorName,
                                 true
@@ -153,6 +155,7 @@ export default class PossibleIssues extends Component {
                             onClick={this.getUserFeedback(
                                 repoName,
                                 buildName,
+                                issueNumber,
                                 issueFullName,
                                 creatorName,
                                 false
