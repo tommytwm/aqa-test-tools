@@ -129,7 +129,7 @@ export default class PossibleIssues extends Component {
                     </a>
                 );
                 const issueState = relatedIssues.items[index].state;
-                const issueId = relatedIssues.items[index].id;
+                const issueNumber = relatedIssues.items[index].html_url.match(/\d/g).join("");
                 const issueFullName = relatedIssues.items[index].title;
                 const creatorName = relatedIssues.items[index].user.login;
 
@@ -175,7 +175,7 @@ export default class PossibleIssues extends Component {
 
                 dataSource[repoName] = dataSource[repoName] || [];
                 dataSource[repoName].push({
-                    key: dataSource[repoName].length,
+                    key: issueNumber,
                     issue,
                     issueCreator,
                     createdAt,
