@@ -12,6 +12,7 @@ export default class PossibleIssues extends Component {
         error: null,
         dataSource: {},
         loading: true,
+        feedback: [],
     };
 
     async componentDidMount() {
@@ -23,6 +24,8 @@ export default class PossibleIssues extends Component {
             console.log(testId);
             const feedback = fetchData(`/api/getUserFeedback?testId=${testId}`);
 
+            // TODO: Check if all the issues have feedback, if not, upsert feedback objects
+            // TODO: Populate the feedback array and highlight the appropriate colours if feedback is positive/negative
             if (feedback.error) {
                 console.log(feedback.error);
             } else {
