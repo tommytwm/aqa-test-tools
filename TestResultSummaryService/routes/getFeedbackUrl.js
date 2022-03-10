@@ -1,5 +1,4 @@
-const { TestResultsDB } = require('../Database');
-const ObjectID = require('mongodb').ObjectID;
+const { TestResultsDB, ObjectID } = require('../Database');
 
 module.exports = async (req, res) => {
     const { testId } =
@@ -9,6 +8,7 @@ module.exports = async (req, res) => {
         res.send({ error: 'Input parameters are missing' });
     } else {
         const db = new TestResultsDB();
+        // TODO: add possibleIssues projection
         const result = await db.getData({ _id: new ObjectID(testId) }).toArray();
         console.log(result);
         if (!result || result.length === 0 ) {
