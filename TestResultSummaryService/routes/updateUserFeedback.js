@@ -5,11 +5,11 @@ const { TestResultsDB, ObjectID } = require('../Database');
 */
 module.exports = async (req, res) => {
     // TODO: need to find and update from TestResultsDB
-    const { _id, issueNumber, feedback } = req.query;
-    if ( _id && issueNumber && feedback ) {
+    const { testId, issueNumber, feedback } = req.query;
+    if ( testId && issueNumber && feedback ) {
         const db = new TestResultsDB();
         await db.update(
-            { _id: new ObjectID(_id) },
+            { _id: new ObjectID(testId) },
             { $set: { "possibleIssues.$.issueNumber":issueNumber, "possibleIssues.$.feedbackCount": feedback }},
             { upsert: true }
         );

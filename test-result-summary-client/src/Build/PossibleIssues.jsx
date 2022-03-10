@@ -33,13 +33,14 @@ export default class PossibleIssues extends Component {
     }
 
     updateUserFeedback = async (
-        id,
+        testId,
+        issueNumber,
         feedback
     ) => {
         //TODO: how should we store the author?
         console.log("update");
         const update = await fetchData(
-            `/api/updateUserFeedback?id=${id}&feedback=${feedback}`
+            `/api/updateUserFeedback?testId=${testId}&issueNumber=${issueNumber}&feedback=${feedback}`
         );
 
         // TODO: decide on appropriate error handling
@@ -143,6 +144,7 @@ export default class PossibleIssues extends Component {
                     <>
                         <Button
                             onClick={() => this.updateUserFeedback(
+                                "60e60be6a2e5057f5cda32f0",
                                 123,
                                 1                            
                             )}
@@ -152,6 +154,7 @@ export default class PossibleIssues extends Component {
                         &nbsp;
                         <Button
                             onClick={() => this.updateUserFeedback(
+                                "60e60be6a2e5057f5cda32f0",
                                 123,
                                 -1                            
                             )}
