@@ -16,14 +16,13 @@ export default class PossibleIssues extends Component {
 
     async componentDidMount() {
         await this.fetchIssues().then(() => {
-          // getUserFeedback
+            // getUserFeedback
             const { testId, buildName, testName } = getParams(
                 this.props.location.search
             );
-            const feedback = fetchData(
-                `/api/getFeedbackUrl?testId=${testId}`
-            );
-    
+            console.log(testId);
+            const feedback = fetchData(`/api/getUserFeedback?testId=${testId}`);
+
             if (feedback.error) {
                 console.log(feedback.error);
             } else {
@@ -32,13 +31,9 @@ export default class PossibleIssues extends Component {
         });
     }
 
-    updateUserFeedback = async (
-        testId,
-        issueNumber,
-        feedback
-    ) => {
+    updateUserFeedback = async (testId, issueNumber, feedback) => {
         //TODO: how should we store the author?
-        console.log("update");
+        console.log('update');
         const update = await fetchData(
             `/api/updateUserFeedback?testId=${testId}&issueNumber=${issueNumber}&feedback=${feedback}`
         );
@@ -137,27 +132,33 @@ export default class PossibleIssues extends Component {
                     </a>
                 );
                 const issueState = relatedIssues.items[index].state;
-                const issueNumber = relatedIssues.items[index].html_url.match(/\d/g).join("");
+                const issueNumber = relatedIssues.items[index].html_url
+                    .match(/\d/g)
+                    .join('');
 
                 // TODO: update upsert not working
                 const userFeedback = (
                     <>
                         <Button
-                            onClick={() => this.updateUserFeedback(
-                                "60e60be6a2e5057f5cda32f0",
-                                123,
-                                1                            
-                            )}
+                            onClick={() =>
+                                this.updateUserFeedback(
+                                    '60e60be6a2e5057f5cda32f0',
+                                    123,
+                                    1
+                                )
+                            }
                         >
                             <SmileOutlined />
                         </Button>
                         &nbsp;
                         <Button
-                            onClick={() => this.updateUserFeedback(
-                                "60e60be6a2e5057f5cda32f0",
-                                123,
-                                -1                            
-                            )}
+                            onClick={() =>
+                                this.updateUserFeedback(
+                                    '60e60be6a2e5057f5cda32f0',
+                                    123,
+                                    -1
+                                )
+                            }
                         >
                             <FrownOutlined />
                         </Button>
