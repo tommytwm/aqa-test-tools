@@ -15,29 +15,22 @@ export default class PossibleIssues extends Component {
     };
 
     async componentDidMount() {
-        await this.fetchIssues();
+        await this.fetchIssues().then(() => {
+          // getUserFeedback
+            const { testId, buildName, testName } = getParams(
+                this.props.location.search
+            );
+            const feedback = fetchData(
+                `/api/getFeedbackUrl?testId=${testId}`
+            );
+    
+            if (feedback.error) {
+                console.log(feedback.error);
+            } else {
+                console.log(feedback.output);
+            }
+        });
     }
-
-    getUserFeedback = async (
-        repoName,
-        buildName,
-        issueNumber,
-        issueName,
-        issueCreator,
-        accuracy
-    ) => {
-        // TODO: We need to find out what the object should look like in this new collection
-
-        const feedback = await fetchData(
-            `/api/getFeedbackUrl?repoName=${repoName}&buildName=${buildName}&issueNumber=${issueNumber}&issueName=${issueName}&issueCreator=${issueCreator}&accuracy=${accuracy}`
-        );
-
-        if (feedback.error) {
-            console.log(feedback.error);
-        } else {
-            console.log(feedback.output.result);
-        }
-    };
 
     updateUserFeedback = async (
         id,
@@ -144,8 +137,6 @@ export default class PossibleIssues extends Component {
                 );
                 const issueState = relatedIssues.items[index].state;
                 const issueNumber = relatedIssues.items[index].html_url.match(/\d/g).join("");
-                const issueFullName = relatedIssues.items[index].title;
-                const creatorName = relatedIssues.items[index].user.login;
 
                 // TODO: update upsert not working
                 const userFeedback = (
