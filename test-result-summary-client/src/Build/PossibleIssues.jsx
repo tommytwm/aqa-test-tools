@@ -34,11 +34,13 @@ export default class PossibleIssues extends Component {
         });
     }
 
-    updateUserFeedback = async (testId, issueNumber, feedback) => {
-        //TODO: how should we store the author?
+    updateUserFeedback = async (issueUrl, feedback) => {
         console.log('update');
+        const { buildId } = getParams(
+            this.props.location.search
+        );
         const update = await fetchData(
-            `/api/updateUserFeedback?testId=${testId}&issueNumber=${issueNumber}&feedback=${feedback}`
+            `/api/updateUserFeedback?buildId=${buildId}&issueUrl=${issueUrl}&feedback=${feedback}`
         );
 
         // TODO: decide on appropriate error handling
@@ -135,9 +137,6 @@ export default class PossibleIssues extends Component {
                     </a>
                 );
                 const issueState = relatedIssues.items[index].state;
-                const issueNumber = relatedIssues.items[index].html_url
-                    .match(/\d/g)
-                    .join('');
 
                 // TODO: update upsert not working
                 const userFeedback = (
@@ -145,8 +144,7 @@ export default class PossibleIssues extends Component {
                         <Button
                             onClick={() =>
                                 this.updateUserFeedback(
-                                    '60e60be6a2e5057f5cda32f0',
-                                    123,
+                                    relatedIssues.items[index].html_url,
                                     1
                                 )
                             }
@@ -157,8 +155,7 @@ export default class PossibleIssues extends Component {
                         <Button
                             onClick={() =>
                                 this.updateUserFeedback(
-                                    '60e60be6a2e5057f5cda32f0',
-                                    123,
+                                    relatedIssues.items[index].html_url,
                                     -1
                                 )
                             }
@@ -180,7 +177,7 @@ export default class PossibleIssues extends Component {
 
                 dataSource[repoName] = dataSource[repoName] || [];
                 dataSource[repoName].push({
-                    key: issueNumber,
+                    key: relatedIssues.items[index].html_url,
                     issue,
                     issueCreator,
                     createdAt,
