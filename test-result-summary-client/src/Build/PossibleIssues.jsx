@@ -18,11 +18,11 @@ export default class PossibleIssues extends Component {
     async componentDidMount() {
         await this.fetchIssues().then(() => {
             // getUserFeedback
-            const { testId, buildName, testName } = getParams(
+            const { buildId } = getParams(
                 this.props.location.search
             );
-            console.log(testId);
-            const feedback = fetchData(`/api/getUserFeedback?testId=${testId}`);
+            console.log(buildId);
+            const feedback = fetchData(`/api/getUserFeedback?buildId=${buildId}`);
 
             // TODO: Check if all the issues have feedback, if not, upsert feedback objects
             // TODO: Populate the feedback array and highlight the appropriate colours if feedback is positive/negative
