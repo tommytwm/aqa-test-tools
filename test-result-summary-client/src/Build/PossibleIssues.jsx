@@ -26,6 +26,7 @@ export default class PossibleIssues extends Component {
 
             // TODO: Check if all the issues have feedback, if not, upsert feedback objects
             // TODO: Populate the feedback array and highlight the appropriate colours if feedback is positive/negative
+            // TODO: Calculate the positive and negative counts so that the table can display the highest voted issues
             if (feedback.error) {
                 console.log(feedback.error);
             } else {
@@ -35,12 +36,11 @@ export default class PossibleIssues extends Component {
     }
 
     updateUserFeedback = async (issueUrl, feedback) => {
-        console.log('update');
-        const { buildId } = getParams(
+        const { buildId, testId } = getParams(
             this.props.location.search
         );
         const update = await fetchData(
-            `/api/updateUserFeedback?buildId=${buildId}&issueUrl=${issueUrl}&feedback=${feedback}`
+            `/api/updateUserFeedback?buildId=${buildId}&testId=${testId}&issueUrl=${issueUrl}&feedback=${feedback}`
         );
 
         // TODO: decide on appropriate error handling
